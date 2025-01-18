@@ -1,0 +1,55 @@
+# Ignore API keys and sensitive data
+shell_gpt/
+ngrok/ngrok.yml
+
+# Ignore local environment files
+start_fp_*.sh
+.zshrc
+
+# Node/npm related
+nvm/
+node_modules/
+.npm/
+.node_repl_history
+
+# Cache and temporary files
+.cache/
+*.log
+*.cache
+.DS_Store
+
+# Local history and sessions
+.local/
+nnn/.lastd
+nnn/sessions/
+nnn/mounts/
+
+# Editor specific
+.vscode/
+*.swp
+*.swo
+*~
+
+# Package manager specific
+.pnpm-store/
+
+# Exercism config (contains user token)
+exercism/user.json
+
+# Github Copilot credentials
+github-copilot/
+
+# Backup files
+*.bak
+*backup*
+
+# BTOp generated files
+btop/btop.log
+
+# Version lock files (optional, depending on if you want to track these)
+lazy-lock.json
+versions.json
+
+# Local test files
+test/
+
