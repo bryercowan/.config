@@ -22,6 +22,8 @@ return {
                 'ts_ls',  -- JavaScript/TypeScript
                 'pyright',   -- Python
                 'rust_analyzer', -- Rust
+                'hls', --haskell
+                'lua_ls', --lua
                 -- Add more LSP servers as needed
             })
 
@@ -52,7 +54,7 @@ return {
             -- Additional settings for Mason (if using)
             require('mason').setup()
             require('mason-lspconfig').setup({
-                ensure_installed = { 'ts_ls', 'pyright', 'rust_analyzer' }, -- Add more servers here
+                ensure_installed = { 'ts_ls', 'pyright', 'rust_analyzer', 'hls', 'lua_ls' }, -- Add more servers here
             })
         end
     }
