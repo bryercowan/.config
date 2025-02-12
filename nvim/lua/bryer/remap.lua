@@ -1,6 +1,8 @@
 vim.g.mapleader = " "
 -- vim.keymap.set("n", "<leader>fv", vim.cmd.Ex)
 vim.keymap.set('n', '<leader>f', ':NvimTreeFindFile<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>gb', ':BlameToggle<CR>')
+vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition, { desc = 'Go to definition' })
 vim.keymap.set('n', '<leader>fw', function()
     builtin.grep_string({ search = vim.fn.expand('<cword>') })
 end, { desc = 'Search word under cursor' })
