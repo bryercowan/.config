@@ -5,15 +5,9 @@ vim.g.loaded_netrwPlugin = 1
 -- optionally enable 24-bit colour
 vim.opt.termguicolors = true
 vim.opt.clipboard = "unnamedplus"
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*.rs",
-  callback = function()
-    vim.lsp.buf.format({ async = false })
-  end,
-})
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = { "*.ts", "*.tsx", "*.js", "*.jsx", "*.json", "*.css", "*.scss", "*.html", "*.md" },
+  pattern = { "*.ts", "*.tsx", "*.js", "*.jsx", "*.json", "*.css", "*.scss", "*.html", "*.md", "*.rs", "*.lua" },
   callback = function()
     vim.lsp.buf.format({ async = false })
   end,
