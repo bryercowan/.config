@@ -7,7 +7,7 @@ vim.opt.termguicolors = true
 vim.opt.clipboard = "unnamedplus"
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = { "*.ts", "*.tsx", "*.js", "*.jsx", "*.json", "*.css", "*.scss", "*.html", "*.md", "*.rs", "*.lua", ".php" },
+  pattern = { "*.ts", "*.tsx", "*.js", "*.jsx", "*.json", "*.css", "*.scss", "*.html", "*.md", "*.rs", "*.lua", "*.php" },
   callback = function()
     vim.lsp.buf.format({ async = false })
   end,
