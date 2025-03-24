@@ -5,6 +5,7 @@ vim.g.loaded_netrwPlugin = 1
 -- optionally enable 24-bit colour
 vim.opt.termguicolors = true
 vim.opt.clipboard = "unnamedplus"
+vim.o.completeopt = "menu,menuone,noselect"
 
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = { "*.ts", "*.tsx", "*.js", "*.jsx", "*.json", "*.css", "*.scss", "*.html", "*.md", "*.rs", "*.lua", "*.php" },

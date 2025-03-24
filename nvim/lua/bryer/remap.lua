@@ -4,7 +4,7 @@ vim.keymap.set('n', '<leader>f', ':NvimTreeFindFile<CR>', { noremap = true, sile
 vim.keymap.set('n', '<leader>gb', ':BlameToggle<CR>')
 vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition, { desc = 'Go to definition' })
 vim.keymap.set('n', '<leader>fw', function()
-    builtin.grep_string({ search = vim.fn.expand('<cword>') })
+  builtin.grep_string({ search = vim.fn.expand('<cword>') })
 end, { desc = 'Search word under cursor' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
@@ -13,3 +13,4 @@ vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', { noremap = true, silent = true 
 vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-c>', '<C-w>c', { noremap = true, silent = true })
