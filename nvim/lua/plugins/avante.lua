@@ -3,26 +3,46 @@ return {
 	event = "VeryLazy",
 	version = false,
 	opts = {
-		provider = "openai",
-		auto_suggestions_provider = "ollama", -- <- tell Avante which model to use
+		provider = "claude",
+		auto_suggestions_provider = "ollama",
 		behaviour = {
-			auto_suggestions = true, -- <- actually turn them on
-			enable_cursor_planning_mode = true, -- gives Cursor‑style multi‑line flow
+			auto_suggestions = true,
+			enable_cursor_planning_mode = true,
 		},
+
 		providers = {
 			openai = {
 				endpoint = "https://api.openai.com/v1",
-				model = "gpt-4o-mini", -- lighter model = snappier hints
+				model = "gpt-4.1-2025-04-14",
 				timeout = 30000,
+				disable_tools = true,
 				extra_request_body = {
 					temperature = 0,
-					max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
-					reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+					max_completion_tokens = 8192,
+					reasoning_effort = "medium",
+				},
+			},
+			claude = {
+				endpoint = "https://api.anthropic.com",
+				model = "claude-sonnet-4-20250514",
+				timeout = 30000, -- Timeout in milliseconds
+				extra_request_body = {
+					temperature = 0.75,
+					max_tokens = 20480,
 				},
 			},
 			ollama = {
 				endpoint = "http://localhost:11434",
-				model = "deepseek-coder:1.3b",
+				model = "codellama:7b-code",
+				timeout = 20000,
+				extra_request_body = {
+					options = {
+						format = "json",
+						stream = false,
+						temperature = 0,
+						structured = true,
+					},
+				},
 			},
 		},
 	},
