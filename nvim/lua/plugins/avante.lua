@@ -4,10 +4,10 @@ return {
 	version = false,
 	opts = {
 		provider = "claude",
-		auto_suggestions_provider = "ollama",
+		auto_suggestions_provider = "claude",
 		behaviour = {
-			auto_suggestions = true,
-			enable_cursor_planning_mode = true,
+			auto_suggestions = false,
+			enable_cursor_planning_mode = false,
 		},
 
 		providers = {

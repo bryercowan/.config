@@ -4,7 +4,7 @@ return {
     require('onedark').setup {
       -- Main options --
       style = 'deep',               -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
-      transparent = false,          -- Show/hide background
+      transparent = true,           -- Show/hide background
       term_colors = true,           -- Change terminal color as per the selected theme style
       ending_tildes = false,        -- Show the end-of-buffer tildes. By default they are hidden
       cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
@@ -26,17 +26,18 @@ return {
 
       -- Lualine options --
       lualine = {
-        transparent = false, -- lualine center bar transparency
+        transparent = true,  -- lualine center bar transparency
       },
 
       -- Custom Highlights --
       colors = {},                                      -- Override default colors
       highlights = {
         Normal = { bg = "NONE" },                       -- Keep background transparent
-        Visual = { bg = "#004080", fg = "#555555" },    -- Medium-dark blue for visual selection
-        Search = { bg = "#003366", fg = "#555555" },    -- Darker blue for search highlights, with semi-dark grey text
-        IncSearch = { bg = "#002244", fg = "#555555" }, -- Even darker blue for incremental search
-        Pmenu = { bg = "#001a33" },                     -- Dark navy blue for popup menu background
+        NormalFloat = { bg = "NONE" },                   -- Keep floating windows transparent
+        Visual = { bg = "NONE" },                        -- Transparent visual selection
+        Search = { bg = "NONE" },                        -- Transparent search highlights
+        IncSearch = { bg = "NONE" },                     -- Transparent incremental search
+        Pmenu = { bg = "NONE" },                         -- Transparent popup menu background
       },
 
       -- Plugins Config --
