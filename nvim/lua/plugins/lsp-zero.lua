@@ -17,12 +17,28 @@ return {
 			-- Setup LSP Zero with recommended settings
 			local lsp = require("lsp-zero").preset("recommended")
 
-			-- (Optional) Configure LSP server settings for specific languages
 			lsp.configure("ts_ls", {
 				on_attach = function(client, bufnr)
-					-- Additional configurations for TypeScript server if needed
+					-- you can keep any custom mappings here
 				end,
+
 				root_dir = require("lspconfig.util").root_pattern("tsconfig.json", "package.json", ".git"),
+
+				settings = {
+					typescript = {
+						preferences = {
+							importModuleSpecifierPreference = "non-relative", -- 🧭 use aliases instead of ../
+							importModuleSpecifierEnding = "minimal", -- no `.js` endings
+							includeCompletionsForImportStatements = true,
+						},
+					},
+					javascript = {
+						preferences = {
+							importModuleSpecifierPreference = "non-relative",
+							importModuleSpecifierEnding = "minimal",
+						},
+					},
+				},
 			})
 
 			local cmp = require("cmp")
@@ -44,7 +60,7 @@ return {
 				ensure_installed = { "ts_ls", "pyright", "rust_analyzer", "hls", "lua_ls", "intelephense" }, -- Add more servers here
 				handlers = {
 					function(server_name)
-						require("lspconfig")[server_name].setup({})
+						vim.lsp.config[server_name].setup({})
 					end,
 				},
 			})
