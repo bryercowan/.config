@@ -2,26 +2,36 @@
 
 SESSION_NAME="formpiper_client"
 
-# Check if the session already exists
-tmux has-session -t $SESSION_NAME 2>/dev/null
+tmux has-session -t "$SESSION_NAME" 2>/dev/null
 if [ $? != 0 ]; then
-  # Create a new session
-  tmux new-session -d -s $SESSION_NAME -c ~/fp/applicant-client -n editor
+  # ── Window 1: editor ─────────────────────────────────────
+  tmux new-session -d -s "$SESSION_NAME" -c ~/fp/applicant-client -n editor
 
-  # Open the text editor in the first window
-  tmux send-keys -t $SESSION_NAME:editor 'nvim .' C-m
+  LEFT_PANE=$(tmux list-panes -t "$SESSION_NAME:editor" -F '#{pane_id}')
+  RIGHT_PANE=$(tmux split-window -h -p 30 -t "$LEFT_PANE" -P -F '#{pane_id}')
+  BOTTOM_RIGHT_PANE=$(tmux split-window -v -p 50 -t "$RIGHT_PANE" -P -F '#{pane_id}')
+  TOP_RIGHT_PANE="$RIGHT_PANE"
 
-  # Create a new window for terminal
-  tmux new-window -t $SESSION_NAME -n terminal -c ~/fp/applicant-client
+  tmux send-keys -t "$LEFT_PANE" 'nvim .' C-m
+  tmux send-keys -t "$TOP_RIGHT_PANE" 'btop' C-m
+  tmux send-keys -t "$BOTTOM_RIGHT_PANE" 'cd ~/fp/applicant-client && claude' C-m # ← adjust command
 
-  # Create a new window for Server 1
-  tmux new-window -t $SESSION_NAME -n server1 -c ~/fp/applicant-client
-  tmux send-keys -t $SESSION_NAME:server1 'yarn start' C-m
+  # ── Window 2: terminal ───────────────────────────────────
+  tmux new-window -t "$SESSION_NAME" -n terminal -c ~/fp/applicant-client
 
-  # Optional: Switch to the first window (text editor) on attach
-  tmux select-window -t $SESSION_NAME:editor
+  TERM_LEFT=$(tmux list-panes -t "$SESSION_NAME:terminal" -F '#{pane_id}')
+  TERM_RIGHT=$(tmux split-window -h -p 30 -t "$TERM_LEFT" -P -F '#{pane_id}')
+  TERM_BOTTOM_RIGHT=$(tmux split-window -v -p 50 -t "$TERM_RIGHT" -P -F '#{pane_id}')
+  TERM_TOP_RIGHT="$TERM_RIGHT"
+
+  tmux send-keys -t "$TERM_TOP_RIGHT" 'btop' C-m
+  tmux send-keys -t "$TERM_BOTTOM_RIGHT" 'TERM=xterm-256color ~/.config/mapscii_script.sh' C-m
+
+  # ── Window 3: server (full pane) ─────────────────────────
+  tmux new-window -t "$SESSION_NAME" -n server1 -c ~/fp/applicant-client
+  tmux send-keys -t "$SESSION_NAME:server1" 'yarn start' C-m
+
+  tmux select-window -t "$SESSION_NAME:editor"
 fi
 
-# Attach to the session
-tmux attach-session -t $SESSION_NAME
-
+tmux attach-session -t "$SESSION_NAME"
